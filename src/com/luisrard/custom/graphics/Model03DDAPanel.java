@@ -1,0 +1,45 @@
+package com.luisrard.custom.graphics;
+
+import java.awt.*;
+
+public class Model03DDAPanel extends PaintPanel {
+    public Model03DDAPanel() {
+        super();
+        drawLine(100,100,200,200,Color.RED);
+        drawLine(100,100,200,100,Color.GREEN);
+        drawLine(200,100, 100,200,Color.BLUE);
+        setVisible(true);
+    }
+
+    @Override
+    public void drawLine(int x0, int y0, int x1, int y1, Color c) {
+        int diffX = x1 - x0;
+        int diffY = y1 - y0;
+
+        if (diffX == 0 && diffY == 0){
+            putPixel(x0,y0,c);
+            return;
+        }
+
+        int steps;
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            steps = Math.abs(diffX);
+        } else{
+            steps = Math.abs(diffY);
+        }
+        float xInc = (float) diffX / steps;
+        float yInc = (float) diffY / steps;
+        float x = x0;
+        float y = y1;
+        for (int k = 0; k < steps; k++){
+            putPixel((int)x, (int)y, c);
+            x = x + xInc;
+            y = y + yInc;
+        }
+    }
+
+    @Override
+    public String getPanelName() {
+        return "03 Algoritmo DDA (línea recta)";
+    }
+}
