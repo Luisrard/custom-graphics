@@ -17,13 +17,16 @@ public class TestPanels extends JFrame {
                 jPanel = new Model01Panel();
                 break;
             case "2":
-                jPanel = new Model02PanelImprovement();
+                jPanel = new Model02ImprovementPanel();
                 break;
             case "3":
                 jPanel = new Model03DDAPanel();
                 break;
             case "4":
-                jPanel = new Model04PanelBresenham();
+                jPanel = new Model04BresenhamPanel();
+                break;
+            case "6":
+                jPanel = new Model06RectanglePanel();
                 break;
             default:
                 jPanel = new PaintPanel() {

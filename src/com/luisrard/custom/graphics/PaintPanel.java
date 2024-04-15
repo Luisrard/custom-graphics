@@ -13,6 +13,8 @@ public abstract class PaintPanel extends JPanel implements IPaintFrame {
     public PaintPanel(){
         buffer = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
         setSize(WIDTH, HEIGHT);
+        doDraw();
+        setVisible(true);
     }
 
     @Override
@@ -22,6 +24,10 @@ public abstract class PaintPanel extends JPanel implements IPaintFrame {
 
     public void putPixel(int x, int y, Color c) {
         buffer.setRGB(x, y, c.getRGB());
+    }
+
+    public void doDraw(){
+        putPixel(100,100, Color.RED);
     }
 
     public String getPanelName(){

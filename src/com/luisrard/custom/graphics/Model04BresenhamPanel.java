@@ -2,13 +2,13 @@ package com.luisrard.custom.graphics;
 
 import java.awt.*;
 
-public class Model04PanelBresenham extends PaintPanel {
-    public Model04PanelBresenham() {
-        super();
+public class Model04BresenhamPanel extends PaintPanel {
+
+    @Override
+    public void doDraw() {
         drawLine(100,100,200,200,Color.RED);
         drawLine(100,100,200,100,Color.GREEN);
         drawLine(200,100, 100,200,Color.BLUE);
-        setVisible(true);
     }
 
     @Override
