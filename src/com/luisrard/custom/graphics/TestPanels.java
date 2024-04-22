@@ -1,7 +1,6 @@
 package com.luisrard.custom.graphics;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class TestPanels extends JFrame {
     public static void main(String[] args) {
@@ -25,14 +24,23 @@ public class TestPanels extends JFrame {
             case "4":
                 jPanel = new Model04BresenhamPanel();
                 break;
+            case "5":
+                jPanel = new Model05MiddlePointPanel();
+                break;
             case "6":
                 jPanel = new Model06RectanglePanel();
                 break;
+            case "7":
+                jPanel = new Model07Circle01Panel();
+                break;
+            case "8":
+                jPanel = new Model08Circle02PolarPanel();
+                break;
+            case "9":
+                jPanel = new Model09Circle03PolarSymmetricPanel();
+                break;
             default:
-                jPanel = new PaintPanel() {
-                    @Override
-                    public void drawLine(int x0, int y0, int x1, int y1, Color c) {}
-                };
+                jPanel = new PaintPanel();
         }
         setTitle(jPanel.getPanelName());
         add(jPanel);
