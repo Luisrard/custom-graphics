@@ -7,7 +7,7 @@ public class TestPanels extends JFrame {
         SwingUtilities.invokeLater(() -> new TestPanels(args[0]));
     }
     public TestPanels(String panel) {
-        setSize(400,400);
+        setSize(PaintPanel.WIDTH,PaintPanel.HEIGHT);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         PaintPanel jPanel;
@@ -38,6 +38,15 @@ public class TestPanels extends JFrame {
                 break;
             case "9":
                 jPanel = new Model09Circle03PolarSymmetricPanel();
+                break;
+            case "10":
+                jPanel = new Model10CircleMiddlePointPanel();
+                break;
+            case "11":
+                jPanel = new Model11CircleBresenhamPanel();
+                break;
+            case "12":
+                jPanel = new ModelsPanel();
                 break;
             default:
                 jPanel = new PaintPanel();

@@ -5,13 +5,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class PaintPanel extends JPanel implements IPaintFrame {
-    public static final int WIDTH = 400;
-    public static final int HEIGHT = 400;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 600;
 
     private BufferedImage buffer;
 
     public PaintPanel(){
-        buffer = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
+        buffer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         setSize(WIDTH, HEIGHT);
         doDraw();
         setVisible(true);

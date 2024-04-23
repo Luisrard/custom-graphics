@@ -20,16 +20,14 @@ public class Model03DDAPanel extends PaintPanel {
             return;
         }
 
-        int steps;
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            steps = Math.abs(diffX);
-        } else{
-            steps = Math.abs(diffY);
-        }
+        int steps = Math.max(Math.abs(diffX), Math.abs(diffY));
+
         float xInc = (float) diffX / steps;
         float yInc = (float) diffY / steps;
+
         float x = x0;
-        float y = y1;
+        float y = y0;
+
         for (int k = 0; k < steps; k++){
             putPixel((int)x, (int)y, c);
             x = x + xInc;
