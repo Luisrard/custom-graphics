@@ -13,53 +13,26 @@ public class Model05MiddlePointPanel extends Model04BresenhamPanel {
 
     @Override
     public void drawLine(int x0, int y0, int x1, int y1, Color c) {
-        float x, y, dx, dy, incX = 1, incY =1, incE, incNE, p = 0;
-        x = x0;
-        y = y0;
+        int dx = x1 - x0;
+        int dy = y1 - y0;
+        int d = 2 * dy - dx;
+        int incrE = 2 * dy;
+        int incrNE = 2 * (dy - dx);
+        int x = x0;
+        int y = y0;
 
-        dx = x1 - x0;
-        dy = y1 - y0;
+        putPixel(x, y, c);
 
-        if (dx < 0) {
-            dx = -dx;
-            incX = -1;
-        }
-        if (dy < 0) {
-            dy = -dy;
-            incY = -1;
-        }
-
-        if (dx > dy) {
-            incE = 2 * dy;
-            incNE = 2 * (dy - dx);
-
-            while (x != x1) {
-                putPixel((int) x,(int) y, c);
-                x = x + incX;
-                if (2 * (p + dy) < dx){
-                    p = p + incE;
-                }
-                else {
-                    p = p + incNE;
-                    y += incY;
-                }
+        while (x < x1) {
+            if (d <= 0) {
+                d += incrE;
+                x++;
+            } else {
+                d += incrNE;
+                x++;
+                y++;
             }
-        }
-        else {
-            incE = 2 * dx;
-            incNE = 2 * (dx - dy);
-
-            while (y != y1) {
-                putPixel((int) x,(int) y, c);
-                y = y + incY;
-                if (2 * (p + dx) < dy){
-                    p = p + incE;
-                }
-                else {
-                    p = p + incNE;
-                    x += incX;
-                }
-            }
+            putPixel(x, y, c);
         }
     }
 

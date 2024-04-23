@@ -22,11 +22,6 @@ public class PaintPanel extends JPanel implements IPaintFrame {
         g.drawImage(buffer, 0, 0, null);
     }
 
-    @Override
-    public void drawLine(int x0, int y0, int x1, int y1, Color c) {
-        throw new RuntimeException("Method unimplemented");
-    }
-
     public void putPixel(int x, int y, Color c) {
         buffer.setRGB(x, y, c.getRGB());
     }

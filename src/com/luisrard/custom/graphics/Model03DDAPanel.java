@@ -10,7 +10,6 @@ public class Model03DDAPanel extends PaintPanel {
         drawLine(200,100, 100,200,Color.BLUE);
     }
 
-    @Override
     public void drawLine(int x0, int y0, int x1, int y1, Color c) {
         int diffX = x1 - x0;
         int diffY = y1 - y0;

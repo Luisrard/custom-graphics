@@ -11,65 +11,26 @@ public class Model04BresenhamPanel extends PaintPanel {
         drawLine(200,100, 100,200,Color.BLUE);
     }
 
-    @Override
     public void drawLine(int x0, int y0, int x1, int y1, Color c) {
-        int diffX = x1 - x0;
-        int diffY = y1 - y0;
-
-        if (diffX == 0 && diffY == 0){
-            putPixel(x0,y0,c);
-            return;
-        }
-
-        int incX = 1, incY = 1;
-        if (diffX < 0){
-            incX = -1;
-        }
-        if (diffY < 0){
-            incY = -1;
-        }
-
-        diffX = Math.abs(diffX);
-        diffY =  Math.abs(diffY);
-
-        boolean dxMax = diffX >  diffY;
-
-        if(dxMax){
-            int A = 2 * diffY;
-            int B = A - 2 * diffX;
-            int p = A - diffX;
-
-            for (int x = x0, y = y0; x != x1; ){
+        int dx = Math.abs(x1 - x0);
+        int dy = Math.abs(y1 - y0);
+        int incX = x0 < x1 ? 1 : -1;
+        int incY = y0 < y1 ? 1 : -1;
+        int err = dx - dy;
+        int x = x0;
+        int y = y0;
+        while (x != x1 || y != y1) {
+            putPixel(x, y0, c);
+            int e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
                 x += incX;
-                if (p < 0){
-                    putPixel(x, y, c);
-                    p = p + A;
-                } else {
-                    y += incY;
-
-                    putPixel(x, y, c);
-                    p = p + B;
-                }
             }
-        } else {
-            int A = 2 * diffX;
-            int B = A - 2 * diffY;
-            int p = A - diffY;
-
-            for (int x = x0, y = y0; y != y1; ){
+            if (e2 < dx) {
+                err += dx;
                 y += incY;
-                if (p < 0){
-                    putPixel(x, y, c);
-                    p = p + A;
-                } else {
-                    x += incX;
-
-                    putPixel(x, y, c);
-                    p = p + B;
-                }
             }
         }
-
     }
 
     @Override

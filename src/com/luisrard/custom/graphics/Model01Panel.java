@@ -10,8 +10,6 @@ public class Model01Panel extends PaintPanel {
         drawLine(200,100, 100,200,Color.BLUE);
     }
 
-
-    @Override
     public void drawLine(int x0, int y0, int x1, int y1, Color c){
         boolean inc = x1 > x0;
         float m = (y1 - y0) / (x1 - x0);

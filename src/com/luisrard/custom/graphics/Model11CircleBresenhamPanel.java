@@ -3,8 +3,6 @@ package com.luisrard.custom.graphics;
 import java.awt.*;
 
 public class Model11CircleBresenhamPanel extends PaintPanel {
-    static final byte [] xyArray = {1,-1};
-
     @Override
     public void doDraw() {
         for (int i = 0, r; i <= 8; i ++){
