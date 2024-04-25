@@ -5,11 +5,11 @@ import java.awt.*;
 public class Model11CircleBresenhamPanel extends PaintPanel {
     @Override
     public void doDraw() {
-        for (int i = 0, r; i <= 8; i ++){
-            r = 50 + 15 * i;
-            drawCircle(200,200, r, Color.GREEN);
-            drawCircle(200,200, r + 5, Color.RED);
-            drawCircle(200,200, r + 10, Color.YELLOW);
+        for (int i = 0, r; i <= 5; i ++){
+            r = 50 + 30 * i;
+            drawCircle(300,300, r, Color.GREEN);
+            drawCircle(300,300, r + 10, Color.RED);
+            drawCircle(300,300, r + 20, Color.YELLOW);
 
         }
     }

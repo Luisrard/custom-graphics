@@ -48,6 +48,18 @@ public class TestPanels extends JFrame {
             case "12":
                 jPanel = new ModelsPanel();
                 break;
+            case "13":
+                jPanel = new Model13LineThicknessPanel();
+                break;
+            case "14":
+                jPanel = new Model14LineMaskPanel();
+                break;
+            case "15":
+                jPanel = new Model15CircleMaskPanel();
+                break;
+            case "16":
+                jPanel = new Model16CircleThicknessPanel();
+                break;
             default:
                 jPanel = new PaintPanel();
         }
