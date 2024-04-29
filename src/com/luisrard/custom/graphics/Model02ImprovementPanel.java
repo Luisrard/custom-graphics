@@ -8,6 +8,7 @@ public class Model02ImprovementPanel extends PaintPanel {
         drawLine(100,100,200,200,Color.RED);
         drawLine(100,100,200,100,Color.GREEN);
         drawLine(200,100, 100,200,Color.BLUE);
+        drawLine(200,100, 400,200,Color.GREEN);
     }
 
     public void drawLine(int x0, int y0, int x1, int y1, Color c) {

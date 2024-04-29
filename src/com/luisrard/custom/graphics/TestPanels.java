@@ -46,7 +46,7 @@ public class TestPanels extends JFrame {
                 jPanel = new Model11CircleBresenhamPanel();
                 break;
             case "12":
-                jPanel = new ModelsPanel();
+                jPanel = new Model12FullFiguresPanel();
                 break;
             case "13":
                 jPanel = new Model13LineThicknessPanel();
@@ -59,6 +59,15 @@ public class TestPanels extends JFrame {
                 break;
             case "16":
                 jPanel = new Model16CircleThicknessPanel();
+                break;
+            case "17":
+                jPanel = new Model17ScanLinePanel();
+                break;
+            case "18":
+                jPanel = new Model18FloodFillPanel();
+                break;
+            case "19":
+                jPanel = new Model19CutBresenhamPanel();
                 break;
             default:
                 jPanel = new PaintPanel();

@@ -7,30 +7,42 @@ public class Model05MiddlePointPanel extends Model04BresenhamPanel {
     public void doDraw() {
         drawLine(100,100,200,200,Color.RED);
         drawLine(100,100,200,100,Color.GREEN);
-        drawLine(200,100, 100,200,Color.BLUE);
+        drawLine(200,100, 100,201,Color.BLUE);
+        drawLine(200,100, 400,200,Color.ORANGE);
+        drawLine(200,100, 200,200,Color.ORANGE);
     }
 
 
     @Override
     public void drawLine(int x0, int y0, int x1, int y1, Color c) {
-        int dx = x1 - x0;
-        int dy = y1 - y0;
-        int d = 2 * dy - dx;
-        int incrE = 2 * dy;
-        int incrNE = 2 * (dy - dx);
+        int dx = Math.abs(x1 - x0);
+        int dy = Math.abs(y1 - y0);
+        int incX = x0 < x1 ? 1 : -1;
+        int incY = y0 < y1 ? 1 : -1;
+
+        boolean dxGreater =  dx > dy;
+
+        int maxD = dxGreater ? dx : dy;
+        int minD = dxGreater ? dy : dx;
+        int d = 2 * minD - maxD;
+        int incrE = 2 * minD;
+        int incrNE = 2 * (minD - maxD);
         int x = x0;
         int y = y0;
 
         putPixel(x, y, c);
-
-        while (x < x1) {
+        while (x != x1 || y != y1) {
             if (d <= 0) {
                 d += incrE;
-                x++;
+                if (dxGreater){
+                    x += incX;
+                } else {
+                    y += incY;
+                }
             } else {
                 d += incrNE;
-                x++;
-                y++;
+                x += incX;
+                y += incY;
             }
             putPixel(x, y, c);
         }

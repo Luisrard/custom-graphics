@@ -5,7 +5,9 @@ import java.awt.*;
 public class Model06RectanglePanel extends Model04BresenhamPanel {
     @Override
     public void doDraw() {
-        drawRectangle(10,100,200,100, Color.RED);
+        for (int i = 0; i < 100; i += 10){
+            drawRectangle(10 + i,100 + i,200,100, Color.RED);
+        }
     }
 
     public void drawRectangle(int x, int y, int width, int height, Color c){

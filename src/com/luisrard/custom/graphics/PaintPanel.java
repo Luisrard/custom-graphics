@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class PaintPanel extends JPanel implements IPaintFrame {
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 800;
 
     private BufferedImage buffer;
 

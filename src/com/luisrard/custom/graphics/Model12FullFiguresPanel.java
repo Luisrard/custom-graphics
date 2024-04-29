@@ -2,7 +2,7 @@ package com.luisrard.custom.graphics;
 
 import java.awt.*;
 
-public class ModelsPanel extends PaintPanel implements  IPaintFullFrame {
+public class Model12FullFiguresPanel extends PaintPanel implements  IPaintFullFrame {
     @Override
     public void doDraw() {
         drawLine(0,0, 599,599, Color.white);
