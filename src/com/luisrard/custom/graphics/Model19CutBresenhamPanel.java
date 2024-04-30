@@ -12,7 +12,8 @@ public class Model19CutBresenhamPanel extends PaintPanel {
     @Override
     public void doDraw() {
 //        int [] rectangleCut = new int[]{0, 0, WIDTH, HEIGHT};
-        int [] rectangleCut = new int[]{100, 100, 200, 200};
+        int [] rectangleCut = new int[]{100, 100, 250, 250};
+        fillRectangle(rectangleCut, Color.GRAY);
         drawLineWithCut(100,100,300,300, rectangleCut, Color.RED);
         drawLineWithCut(100,100,300,100, rectangleCut, Color.GREEN);
         drawLineWithCut(100,300,200,100,  rectangleCut, Color.BLUE);
@@ -20,7 +21,7 @@ public class Model19CutBresenhamPanel extends PaintPanel {
 
         drawLineWithCut(50,50, 300,300, rectangleCut, Color.WHITE);
     }
-/*
+
     public void fillRectangle(int [] rectangle, Color c){
         fillRectangle(rectangle[0], rectangle[1], rectangle[2], rectangle[3], c);
     }
@@ -31,7 +32,6 @@ public class Model19CutBresenhamPanel extends PaintPanel {
             }
         }
     }
- */
 
     public void drawLineWithCut(int x0, int y0, int x1, int y1, int [] rectangleCut, Color c){
         int xStart = rectangleCut[0];

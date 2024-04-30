@@ -69,6 +69,9 @@ public class TestPanels extends JFrame {
             case "19":
                 jPanel = new Model19CutBresenhamPanel();
                 break;
+            case "20":
+                jPanel = new Model20CutBresenhamCirclePanel();
+                break;
             default:
                 jPanel = new PaintPanel();
         }
