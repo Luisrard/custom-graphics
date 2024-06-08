@@ -1,7 +1,10 @@
-package com.luisrard.custom.graphics;
+package com.luisrard.custom.graphics.second.partial;
 
 import java.awt.*;
 
+/*
+Una ventaja que tiene este codigo es que se reduce en un cuarto la cantidad de operaciones para imprimir un circulo
+ */
 public class Model09Circle03PolarSymmetricPanel extends PaintPanel {
     static final byte [] xyArray = {1,-1};
 

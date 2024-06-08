@@ -1,7 +1,10 @@
-package com.luisrard.custom.graphics;
+package com.luisrard.custom.graphics.second.partial;
 
 import java.awt.*;
 
+/*
+Tiene la ventaja de imprimir de mejor manera el circulo, con la desventaja de hacer operaciones trigonometricas.
+ */
 public class Model08Circle02PolarPanel extends PaintPanel {
     @Override
     public void doDraw() {

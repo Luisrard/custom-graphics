@@ -1,4 +1,4 @@
-package com.luisrard.custom.graphics;
+package com.luisrard.custom.graphics.second.partial;
 
 import java.awt.*;
 

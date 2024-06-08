@@ -1,7 +1,10 @@
-package com.luisrard.custom.graphics;
+package com.luisrard.custom.graphics.second.partial;
 
 import java.awt.*;
-
+/*
+Las mayores diferencias son que algunas variables se deben de utilizar el punto flotante
+y que si la segunda coordenada es menor se reduce x.
+ */
 public class Model01Panel extends PaintPanel {
     @Override
     public void doDraw() {

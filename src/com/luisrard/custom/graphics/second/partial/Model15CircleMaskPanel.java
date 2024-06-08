@@ -1,7 +1,10 @@
-package com.luisrard.custom.graphics;
+package com.luisrard.custom.graphics.second.partial;
 
 import java.awt.*;
 
+/*
+Algunas de las deficiencias identificadas es que se calcula cada paso aunque no se tenga que imprimir, se podria mejorar eso y dar saltos mas largos
+ */
 public class Model15CircleMaskPanel extends PaintPanel {
     @Override
     public void doDraw() {

@@ -1,7 +1,10 @@
-package com.luisrard.custom.graphics;
+package com.luisrard.custom.graphics.second.partial;
 
 import java.awt.*;
 
+/*
+Agregue para poder aumentar x o y dependiendo de la pendiente.
+ */
 public class Model02ImprovementPanel extends PaintPanel {
     @Override
     public void doDraw() {

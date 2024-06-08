@@ -1,7 +1,9 @@
-package com.luisrard.custom.graphics;
+package com.luisrard.custom.graphics.second.partial;
 
 import java.awt.*;
-
+/*
+Algunas deficiencias de este codigo es que cada desplazamiento requiere un calculo de raiz cuadrada y elevaciones al cuadrado, lo cual no es eficiente
+ */
 public class Model07Circle01Panel extends PaintPanel {
     @Override
     public void doDraw() {

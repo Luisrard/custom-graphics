@@ -1,7 +1,10 @@
-package com.luisrard.custom.graphics;
+package com.luisrard.custom.graphics.second.partial;
 
 import java.awt.*;
 
+/*
+El algoritmo de punto medio utiliza el concepto de punto medio entre dos puntos para trazar el circulo, mientras que el algoritmo de Bresenham se basa en cálculos incrementales para determinar qué píxel debe ser seleccionado en cada paso.
+ */
 public class Model11CircleBresenhamPanel extends PaintPanel {
     @Override
     public void doDraw() {
