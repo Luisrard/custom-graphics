@@ -2,6 +2,7 @@ package com.luisrard.custom.graphics.third.partial;
 
 
 import com.luisrard.custom.graphics.second.partial.PaintPanel;
+import com.luisrard.custom.graphics.third.partial.panels.*;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -31,28 +32,34 @@ public class MainFrame extends JFrame {
 
         switch (panelName){
             case "01 Proyección paralela":
-                jPanel = new MainPanel();
+                jPanel = new ParallelPanel();
                 break;
             case "02 Proyección de perspectiva" :
-                jPanel = new MainPanelPerspective();
+                jPanel = new PerspectivePanel();
                 break;
             case "03 Traslación 3D" :
-                MainPanelTranslation mainPanelTraslation = new MainPanelTranslation();
+                TranslationPanel mainPanelTraslation = new TranslationPanel();
                 characterConsumer = mainPanelTraslation.getCharacterConsumer();
                 jPanel = mainPanelTraslation;
                 break;
             case "04 Escalamiento 3D" :
-                MainPanelScale mainPanelScale = new MainPanelScale();
+                ScalePanel mainPanelScale = new ScalePanel();
                 characterConsumer = mainPanelScale.getCharacterConsumer();
                 jPanel = mainPanelScale;
                 break;
             case "05 Rotación 3D" :
-                MainPanelRotation mainPanelRotation = new MainPanelRotation();
+                RotationPanel mainPanelRotation = new RotationPanel();
                 characterConsumer = mainPanelRotation.getCharacterConsumer();
                 jPanel = mainPanelRotation;
                 break;
             case "06 Rotación 3D automática" :
-                jPanel = new MainPanelRotationAutomatic();
+                jPanel = new RotationAutomaticPanel();
+                break;
+            case "07 Curva explicita 3D" :
+                jPanel = new Curve3DPanel();
+                break;
+            case "08 Superficie 3D" :
+                jPanel = new Surface3DPanel();
                 break;
             default:
                 jPanel = new JPanel();

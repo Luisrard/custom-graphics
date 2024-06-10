@@ -1,41 +1,35 @@
-package com.luisrard.custom.graphics.third.partial;
+package com.luisrard.custom.graphics.third.partial.panels;
+
+import com.luisrard.custom.graphics.third.partial.models.CubeParallel;
 
 import java.awt.*;
 import java.util.function.Consumer;
 
-public class MainPanelRotation extends MainPanel {
+public class TranslationPanel extends MainPanel {
     private CubeParallel cube;
-    private Consumer<Character>  characterConsumer;
+    private final Consumer<Character>  characterConsumer;
 
-    private static final int MOVE_IN_Y = 5, MOVE_IN_X = 5, MOVE_IN_Z = 5;
-    public MainPanelRotation(){
+    private static final int MOVE_IN_Y = 5, MOVE_IN_X = 5;
+    public TranslationPanel(){
         super();
         characterConsumer = character -> {
             boolean print = true;
             switch (character){
                 case 'w':
                 case 'W':
-                    cube.increaseXRotation(-MOVE_IN_X);
+                    cube.increaseYTranslation(-MOVE_IN_Y);
                     break;
                 case 's':
                 case 'S':
-                    cube.increaseXRotation(MOVE_IN_X);
+                    cube.increaseYTranslation(MOVE_IN_Y);
                     break;
                 case 'a':
                 case 'A':
-                    cube.increaseYRotation(-MOVE_IN_Y);
+                    cube.increaseXTranslation(-MOVE_IN_X);
                     break;
                 case 'd':
                 case 'D':
-                    cube.increaseYRotation(MOVE_IN_Y);
-                    break;
-                case 'q':
-                case 'Q':
-                    cube.increaseZRotation(MOVE_IN_Z);
-                    break;
-                case 'e':
-                case 'E':
-                    cube.increaseZRotation(MOVE_IN_Z);
+                    cube.increaseXTranslation(MOVE_IN_X);
                     break;
                 default:
                     print = false;
@@ -50,16 +44,11 @@ public class MainPanelRotation extends MainPanel {
     @Override
     public void doMove() {
         cube = new CubeParallel(buffer);
+        setCustomBufferImage(cube);
         cube.drawObject();
     }
 
     public Consumer<Character> getCharacterConsumer() {
         return this.characterConsumer;
-    }
-
-
-    @Override
-    public void paint(Graphics g) {
-        g.drawImage(cube, 0, 0, null);
     }
 }

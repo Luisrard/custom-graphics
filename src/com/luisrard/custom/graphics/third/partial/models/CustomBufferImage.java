@@ -1,4 +1,4 @@
-package com.luisrard.custom.graphics.third.partial;
+package com.luisrard.custom.graphics.third.partial.models;
 
 import com.luisrard.custom.graphics.obj.Face;
 import com.luisrard.custom.graphics.obj.ObjModel;
@@ -18,17 +18,21 @@ public class CustomBufferImage extends BufferedImage {
     protected double[][] matrixMove;
     private double[][] zBuffer;
 
+    protected final BufferedImage backGroundBuffer;
 
-    public CustomBufferImage(int width, int height) {
+
+    public CustomBufferImage(int width, int height, BufferedImage backGroundBuffer) {
         super(width, height, BufferedImage.TYPE_INT_ARGB);
         this.width = width;
         this.height = height;
+        this.backGroundBuffer = backGroundBuffer;
     }
 
-    public CustomBufferImage(int width, int height, int type) {
+    public CustomBufferImage(int width, int height, BufferedImage backGroundBuffer, int type) {
         super(width, height, type);
         this.width = width;
         this.height = height;
+        this.backGroundBuffer = backGroundBuffer;
     }
 
     public void setMatrixMove(double[][] matrixMove){
@@ -178,7 +182,7 @@ public class CustomBufferImage extends BufferedImage {
         }
     }
 
-    private void drawLine(int x0, int y0, double z0, int x1, int y1, double z1, Color c) {
+    protected void drawLine(int x0, int y0, double z0, int x1, int y1, double z1, Color c) {
         int dx = Math.abs(x1 - x0);
         int dy = Math.abs(y1 - y0);
         double dz = Math.abs(z1 - z0);
@@ -225,17 +229,17 @@ public class CustomBufferImage extends BufferedImage {
     }
 
     public void putPixel(int x, int y, Color c) {
-        if (x < 0 || x > width || y < 0 || y > height){
+        if (x < 0 || x > width - 1 || y < 0 || y > height - 1){
             return;
         }
         this.setRGB(x, y, c.getRGB());
     }
 
-    private void drawLine(int[] vertex0, int[] vertex1, Color c) {
+    protected void drawLine(int[] vertex0, int[] vertex1, Color c) {
         drawLine(vertex0[0], vertex0[1], vertex1[0], vertex1[1], c);
     }
 
-    private void drawLine(int x0, int y0, int x1, int y1, Color c) {
+    protected void drawLine(int x0, int y0, int x1, int y1, Color c) {
         int dx = Math.abs(x1 - x0);
         int dy = Math.abs(y1 - y0);
         int incX = x0 < x1 ? 1 : -1;
@@ -246,7 +250,7 @@ public class CustomBufferImage extends BufferedImage {
         while (true) {
             putPixel(x, y, c);
 
-            if (x0 == x1 && y0 == y1) {
+            if (x == x1 && y == y1) {
                 break;
             }
 
@@ -449,5 +453,9 @@ public class CustomBufferImage extends BufferedImage {
                 {0, 0, (far + near) / (near - far), (2 * far * near) / (near - far)},
                 {0, 0, -1, 0}
         };
+    }
+
+    protected void drawBackGround(){
+        getGraphics().drawImage(backGroundBuffer, 0, 0, null);
     }
 }

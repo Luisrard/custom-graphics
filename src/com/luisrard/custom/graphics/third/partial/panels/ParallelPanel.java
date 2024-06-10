@@ -1,18 +1,22 @@
-package com.luisrard.custom.graphics.third.partial;
+package com.luisrard.custom.graphics.third.partial.panels;
+
+import com.luisrard.custom.graphics.third.partial.models.CubeParallel;
 
 import java.awt.*;
 
-public class MainPanelPerspective extends MainPanel {
-    private CubePerspective cube;
+public class ParallelPanel extends MainPanel {
 
-    public MainPanelPerspective(){
+    private CubeParallel cube;
+
+    public ParallelPanel(){
         super();
     }
 
     public void doMove(){
-        cube = new CubePerspective(buffer);
-        new Thread(()->{
-            while (true){
+        cube = new CubeParallel(buffer);
+        setCustomBufferImage(cube);
+        new Thread(() -> {
+            while (true) {
                 cube.moveObject();
                 try {
                     Thread.sleep(1000);
@@ -23,10 +27,4 @@ public class MainPanelPerspective extends MainPanel {
             }
         }).start();
     }
-
-    @Override
-    public void paint(Graphics g) {
-        g.drawImage(cube, 0, 0, null);
-    }
-
 }

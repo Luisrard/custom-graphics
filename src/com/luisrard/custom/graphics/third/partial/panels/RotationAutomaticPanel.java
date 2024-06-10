@@ -1,13 +1,14 @@
-package com.luisrard.custom.graphics.third.partial;
+package com.luisrard.custom.graphics.third.partial.panels;
+
+import com.luisrard.custom.graphics.third.partial.models.CubeParallel;
 
 import java.awt.*;
-import java.util.function.Consumer;
 
-public class MainPanelRotationAutomatic extends MainPanel {
+public class RotationAutomaticPanel extends MainPanel {
     private CubeParallel cube;
 
     private static final int MOVE_IN_Y = 5, MOVE_IN_X = 5, MOVE_IN_Z = 5;
-    public MainPanelRotationAutomatic(){
+    public RotationAutomaticPanel(){
         super();
         new Thread(() -> {
             while (true) {
@@ -27,12 +28,7 @@ public class MainPanelRotationAutomatic extends MainPanel {
     @Override
     public void doMove() {
         cube = new CubeParallel(buffer);
+        setCustomBufferImage(cube);
         cube.drawObject();
-    }
-
-
-    @Override
-    public void paint(Graphics g) {
-        g.drawImage(cube, 0, 0, null);
     }
 }

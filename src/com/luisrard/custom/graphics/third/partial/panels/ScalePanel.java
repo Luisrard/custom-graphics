@@ -1,14 +1,16 @@
-package com.luisrard.custom.graphics.third.partial;
+package com.luisrard.custom.graphics.third.partial.panels;
+
+import com.luisrard.custom.graphics.third.partial.models.CubeParallel;
 
 import java.awt.*;
 import java.util.function.Consumer;
 
-public class MainPanelScale extends MainPanel {
+public class ScalePanel extends MainPanel {
     private CubeParallel cube;
-    private Consumer<Character>  characterConsumer;
+    private final Consumer<Character>  characterConsumer;
 
     private static final int MOVE_IN_Y = 5, MOVE_IN_X = 5;
-    public MainPanelScale(){
+    public ScalePanel(){
         super();
         characterConsumer = character -> {
             boolean print = true;
@@ -42,16 +44,11 @@ public class MainPanelScale extends MainPanel {
     @Override
     public void doMove() {
         cube = new CubeParallel(buffer);
+        setCustomBufferImage(cube);
         cube.drawObject();
     }
 
     public Consumer<Character> getCharacterConsumer() {
         return this.characterConsumer;
-    }
-
-
-    @Override
-    public void paint(Graphics g) {
-        g.drawImage(cube, 0, 0, null);
     }
 }

@@ -1,11 +1,10 @@
-package com.luisrard.custom.graphics.third.partial;
+package com.luisrard.custom.graphics.third.partial.models;
 
 import com.luisrard.custom.graphics.obj.ObjFileConverter;
 import com.luisrard.custom.graphics.obj.ObjModel;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class CubePerspective extends CustomBufferImage {
     public static final int WIDTH = 1000;
@@ -28,18 +27,14 @@ public class CubePerspective extends CustomBufferImage {
     private int index = 0;
     private ObjModel model;
 
-    private final BufferedImage backGroundBuffer;
-
-    public CubePerspective(BufferedImage backGround){
-        super(WIDTH, HEIGHT);
+    public CubePerspective(BufferedImage backGroundBuffer){
+        super(WIDTH, HEIGHT, backGroundBuffer);
 
         try {
             model = ObjFileConverter.convert("src/img/cube.obj");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        backGroundBuffer = backGround;
         moveObject();
     }
 
@@ -51,10 +46,6 @@ public class CubePerspective extends CustomBufferImage {
         if (index >= matrixMoves.length){
             index = 0;
         }
-    }
-
-    public void drawBackGround(){
-        getGraphics().drawImage(backGroundBuffer, 0, 0, null);
     }
 
     public void doDraw(){

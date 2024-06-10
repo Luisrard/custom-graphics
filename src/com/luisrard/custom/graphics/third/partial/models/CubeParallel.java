@@ -1,4 +1,4 @@
-package com.luisrard.custom.graphics.third.partial;
+package com.luisrard.custom.graphics.third.partial.models;
 
 import com.luisrard.custom.graphics.obj.ObjFileConverter;
 import com.luisrard.custom.graphics.obj.ObjModel;
@@ -36,18 +36,16 @@ public class CubeParallel extends CustomBufferImage {
     private int rotationX = 20;
     private int rotationY = 20;
     private int rotationZ = 0;
-    private final BufferedImage backGroundBuffer;
 
     public CubeParallel(BufferedImage backGround){
-        super(WIDTH, HEIGHT);
+        super(WIDTH, HEIGHT, backGround);
+        matrix = MATRIX_MOVES[0];
 
         try {
             model = ObjFileConverter.convert("src/img/cube.obj");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        matrix = MATRIX_MOVES[0];
-        backGroundBuffer = backGround;
         moveObject();
     }
 
@@ -117,10 +115,6 @@ public class CubeParallel extends CustomBufferImage {
                 generateRotationXMatrix(rotationX),
                 generateRotationYMatrix(rotationY),
                 generateRotationZMatrix(rotationZ));
-    }
-
-    public void drawBackGround(){
-        getGraphics().drawImage(backGroundBuffer, 0, 0, null);
     }
 
     public void drawObject(){
