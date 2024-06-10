@@ -2,8 +2,6 @@ package com.luisrard.custom.graphics.third.partial.panels;
 
 import com.luisrard.custom.graphics.third.partial.models.CubeParallel;
 
-import java.awt.*;
-
 public class ParallelPanel extends MainPanel {
 
     private CubeParallel cube;

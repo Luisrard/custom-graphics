@@ -2,11 +2,6 @@ package com.luisrard.custom.graphics.third.partial.panels;
 
 import com.luisrard.custom.graphics.third.partial.models.Curve3D;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class Curve3DPanel extends MainPanel {
     private Curve3D curve3D;
 
@@ -16,6 +11,7 @@ public class Curve3DPanel extends MainPanel {
 
     public void doMove(){
         curve3D = new Curve3D(buffer);
+        setCustomBufferImage(curve3D);
         new Thread(() -> {
             while (true) {
                 curve3D.incrementAngles(0.01, 0.01, 0.01);
@@ -28,11 +24,6 @@ public class Curve3DPanel extends MainPanel {
                 paint(getGraphics());
             }
         }).start();
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        g.drawImage(curve3D, 0, 0, null);
     }
 
 }

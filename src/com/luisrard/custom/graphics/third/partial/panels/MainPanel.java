@@ -1,7 +1,5 @@
 package com.luisrard.custom.graphics.third.partial.panels;
 
-import com.luisrard.custom.graphics.third.partial.models.CustomBufferImage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;

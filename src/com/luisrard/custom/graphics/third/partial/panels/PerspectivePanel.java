@@ -2,8 +2,6 @@ package com.luisrard.custom.graphics.third.partial.panels;
 
 import com.luisrard.custom.graphics.third.partial.models.CubePerspective;
 
-import java.awt.*;
-
 public class PerspectivePanel extends MainPanel {
     private CubePerspective cube;
 

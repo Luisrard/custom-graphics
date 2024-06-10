@@ -2,7 +2,6 @@ package com.luisrard.custom.graphics.third.partial.panels;
 
 import com.luisrard.custom.graphics.third.partial.models.CubeParallel;
 
-import java.awt.*;
 import java.util.function.Consumer;
 
 public class TranslationPanel extends MainPanel {
