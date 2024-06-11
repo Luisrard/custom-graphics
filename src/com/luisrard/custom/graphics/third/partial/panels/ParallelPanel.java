@@ -3,6 +3,7 @@ package com.luisrard.custom.graphics.third.partial.panels;
 import com.luisrard.custom.graphics.third.partial.models.CubeParallel;
 
 public class ParallelPanel extends MainPanel {
+    private static final int DELAY_FRAME_MS = 100;
 
     private CubeParallel cube;
 
@@ -17,7 +18,7 @@ public class ParallelPanel extends MainPanel {
             while (true) {
                 cube.moveObject();
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(DELAY_FRAME_MS);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

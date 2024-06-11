@@ -15,7 +15,7 @@ public class Surface3DPanel extends MainPanel {
         new Thread(() -> {
             while (true) {
                 surface3D.incrementAngles(.5, .5, .5);
-                surface3D.drawSuperficie();
+                surface3D.drawSurface();
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {

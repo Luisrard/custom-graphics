@@ -3,6 +3,7 @@ package com.luisrard.custom.graphics.third.partial.panels;
 import com.luisrard.custom.graphics.third.partial.models.Cylinder3D;
 
 public class Cylinder3DPanel extends MainPanel {
+    private static final int DELAY_FRAME_MS = 10;
     private Cylinder3D cylinder3D;
 
     public Cylinder3DPanel() {
@@ -14,10 +15,10 @@ public class Cylinder3DPanel extends MainPanel {
         setCustomBufferImage(cylinder3D);
         new Thread(() -> {
             while (true) {
-                cylinder3D.incrementAngles(0.01, 0.01, 0.01);
+                cylinder3D.incrementAngles(0.5, 0.5, 0);
                 cylinder3D.drawCylinder();
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(DELAY_FRAME_MS);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

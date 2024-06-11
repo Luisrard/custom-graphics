@@ -3,6 +3,7 @@ package com.luisrard.custom.graphics.third.partial.panels;
 import com.luisrard.custom.graphics.third.partial.models.CubeParallel;
 
 public class RotationAutomaticPanel extends MainPanel {
+    private static final int DELAY_FRAME_MS = 100;
     private CubeParallel cube;
 
     private static final int MOVE_IN_Y = 5, MOVE_IN_X = 5, MOVE_IN_Z = 5;
@@ -11,7 +12,7 @@ public class RotationAutomaticPanel extends MainPanel {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(DELAY_FRAME_MS);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

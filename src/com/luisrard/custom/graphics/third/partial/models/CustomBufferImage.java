@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class CustomBufferImage extends BufferedImage {
-    private static final int DISTANCE = 150; // Observer distance
+    private static final int DISTANCE = 1000; // Observer distance
     protected final int width;
     protected final int height;
 
@@ -266,19 +266,32 @@ public class CustomBufferImage extends BufferedImage {
         }
     }
 
-    public static int [] addOnes(int [] vertices){
-        if (vertices == null){
+    public static int [] multiplyVertex(double[] vertex, double [][] matrix, boolean perspective){
+        if (vertex == null || matrix == null){
             return null;
         }
-        int [] newVertices = new int[vertices.length/2 + vertices.length];
-
-        for (int ni = 0, i = 0; i< vertices.length; i+=2, ni+=3){
-            newVertices[ni] = vertices[i];
-            newVertices[ni+1] = vertices[i+1];
-            newVertices[ni+2] = 1;
+        int length = matrix.length;
+        double [] appliedOperationsVertex = new double[vertex.length];
+        for (int colum = 0; colum < length; colum++) {
+            double sum = 0;
+            for (int row = 0; row < length; row++){
+                sum += vertex[row] * matrix[colum][row];
+            }
+            appliedOperationsVertex[colum] =  sum;
         }
-        return newVertices;
+
+        int [] newVertex = new int[vertex.length];
+        double scalePerspective = DISTANCE / (appliedOperationsVertex[3] + DISTANCE);
+        for (int i = 0; i < 4; i++) {
+            if (perspective){
+                newVertex[i] = (int) (appliedOperationsVertex[i] * scalePerspective);
+            } else {
+                newVertex[i] = (int) appliedOperationsVertex[i];
+            }
+        }
+        return newVertex;
     }
+
 
     public static int [] multiplyVertex(float[] vertex, double [][] matrix, boolean perspective){
         if (vertex == null || matrix == null){
@@ -295,11 +308,12 @@ public class CustomBufferImage extends BufferedImage {
         }
 
         int [] newVertex = new int[vertex.length];
+        double scalePerspective = DISTANCE / (appliedOperationsVertex[3] + DISTANCE);
         for (int i = 0; i < 4; i++) {
             if (perspective){
-                newVertex[i] = (int) ((appliedOperationsVertex[i] * DISTANCE) / (appliedOperationsVertex[3] + DISTANCE));
+                newVertex[i] = (int) (appliedOperationsVertex[i] * scalePerspective);
             } else {
-              newVertex[i] = (int) appliedOperationsVertex[i];
+                newVertex[i] = (int) appliedOperationsVertex[i];
             }
         }
         return newVertex;
