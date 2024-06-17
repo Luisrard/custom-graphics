@@ -1,7 +1,6 @@
 package com.luisrard.custom.graphics.third.partial.models;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -9,22 +8,21 @@ public class Cylinder3D extends CustomBufferImage {
     public static final Color CURVE_COLOR = Color.WHITE;
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 800;
-    private double scale = 50;
+    private static final double SCALE = 50;
+    private static final int N_POINTS = 50;
 
     private double angleX = 0, angleY = 0, angleZ = 0;
-    private int numPuntos = 50;
 
-    private double[] puntoCubo = {400, 400, 0};
-    private double[] puntoFuga = {400, 400, 1000};
+    private static final double[] VERTEX_CUBE = {400, 400, 0};
+    private static final double[] VERTEX_VANISH_POINT = {400, 400, 1000};
 
     private static final ArrayList<double[]> vertices = new ArrayList<>();
     static {
-        double anguloMaximo = 2 * Math.PI;
-        int numPuntos = 50;
-        double anguloIncremento = anguloMaximo / numPuntos;
+        double maxAngle = 2 * Math.PI;
+        double incAngle = maxAngle / N_POINTS;
 
-        for (double alpha = 0; alpha < anguloMaximo; alpha += anguloIncremento) {
-            for (double beta = 0; beta < anguloMaximo; beta += anguloIncremento) {
+        for (double alpha = 0; alpha < maxAngle; alpha += incAngle) {
+            for (double beta = 0; beta < maxAngle; beta += incAngle) {
                 double[] vertex = new double[4];
                 vertex[0] = (2 + Math.cos(alpha)) * Math.cos(beta);
                 vertex[1] = (2 + Math.cos(alpha)) * Math.sin(beta);
@@ -41,40 +39,40 @@ public class Cylinder3D extends CustomBufferImage {
 
     public void drawCylinder() {
         drawBackGround();
-        int[][] verticesTrasladados = new int[vertices.size()][4];
+        int[][] verticesMoved = new int[vertices.size()][4];
         int i = 0;
         for (double [] vertex : vertices){
-            verticesTrasladados[i] = multiplyVertex(vertex, matrixMove, false);
+            verticesMoved[i] = multiplyVertex(vertex, matrixMove, false);
             i++;
         }
 
-        for (i = 0; i < numPuntos - 1; i++) {
-            for (int j = 0; j < numPuntos; j++) {
-                int index0 = i * numPuntos + j;
-                int index1 = (i + 1) * numPuntos + j;
-                int index2 = i * numPuntos + (j + 1) % numPuntos;
-                int index3 = (i + 1) * numPuntos + (j + 1) % numPuntos;
+        for (i = 0; i < N_POINTS - 1; i++) {
+            for (int j = 0; j < N_POINTS; j++) {
+                int index0 = i * N_POINTS + j;
+                int index1 = (i + 1) * N_POINTS + j;
+                int index2 = i * N_POINTS + (j + 1) % N_POINTS;
+                int index3 = (i + 1) * N_POINTS + (j + 1) % N_POINTS;
 
-                Point2D p0 = applyPerspective(verticesTrasladados[index0]);
-                Point2D p1 = applyPerspective(verticesTrasladados[index1]);
-                Point2D p2 = applyPerspective(verticesTrasladados[index2]);
-                Point2D p3 = applyPerspective(verticesTrasladados[index3]);
+                int[] p0 = applyPerspective(verticesMoved[index0]);
+                int[] p1 = applyPerspective(verticesMoved[index1]);
+                int[] p2 = applyPerspective(verticesMoved[index2]);
+                int[] p3 = applyPerspective(verticesMoved[index3]);
 
-                drawLine((int) p0.getX(), (int) p0.getY(), (int) p1.getX(), (int) p1.getY(), CURVE_COLOR);
-                drawLine((int) p0.getX(), (int) p0.getY(), (int) p2.getX(), (int) p2.getY(), CURVE_COLOR);
-                drawLine((int) p1.getX(), (int) p1.getY(), (int) p3.getX(), (int) p3.getY(), CURVE_COLOR);
-                drawLine((int) p2.getX(), (int) p2.getY(), (int) p3.getX(), (int) p3.getY(), CURVE_COLOR);
+                drawLine(p0, p1, CURVE_COLOR);
+                drawLine(p0, p2, CURVE_COLOR);
+                drawLine(p1, p3, CURVE_COLOR);
+                drawLine(p2, p3, CURVE_COLOR);
             }
         }
     }
 
-    private Point2D applyPerspective(int [] vertex) {
-        double u = -puntoFuga[2] / (vertex[2] - puntoFuga[2]);
+    private int[] applyPerspective(int [] vertex) {
+        double u = -VERTEX_VANISH_POINT[2] / (vertex[2] - VERTEX_VANISH_POINT[2]);
 
-        double px = puntoFuga[0] + (vertex[0] - puntoFuga[0]) * u;
-        double py = puntoFuga[1] + (vertex[1] - puntoFuga[1]) * u;
+        double px = VERTEX_VANISH_POINT[0] + (vertex[0] - VERTEX_VANISH_POINT[0]) * u;
+        double py = VERTEX_VANISH_POINT[1] + (vertex[1] - VERTEX_VANISH_POINT[1]) * u;
 
-        return new Point2D.Double(px, py);
+        return new int[]{(int) px, (int) py};
     }
 
     public void incrementAngles(double angleX, double angleY, double angleZ) {
@@ -84,8 +82,8 @@ public class Cylinder3D extends CustomBufferImage {
 
 
         matrixMove = multiplyMatrices(
-                generateTranslationMatrix(puntoCubo[0], puntoCubo[1], puntoCubo[2]),
-                generateEscalationMatrix(scale, scale, scale),
+                generateTranslationMatrix(VERTEX_CUBE[0], VERTEX_CUBE[1], VERTEX_CUBE[2]),
+                generateEscalationMatrix(SCALE, SCALE, SCALE),
                 generateRotationXMatrix(this.angleX),
                 generateRotationYMatrix(this.angleY),
                 generateRotationZMatrix(this.angleZ));
