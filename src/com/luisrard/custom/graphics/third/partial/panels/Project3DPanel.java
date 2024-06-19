@@ -7,6 +7,8 @@ import com.luisrard.custom.graphics.third.partial.models.Sphere3D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -19,7 +21,7 @@ public class Project3DPanel extends MainPanel {
 
     private boolean sphereStop, cylinderStop, cubeStop, oculosStop;
 
-    private Sphere3D sphere3D;
+    private Sphere3D sphere3D, sphere3D2;
 
     private Cylinder3D cylinder3D;
 
@@ -66,12 +68,14 @@ public class Project3DPanel extends MainPanel {
     public void doMove(){
         setDoubleBuffered(true);
         cylinder3D = new Cylinder3D(buffer);
-        sphere3D = new Sphere3D(buffer);
+        sphere3D = new Sphere3D(buffer,  Color.YELLOW);
+        sphere3D2 = new Sphere3D(buffer,  Color.BLUE);
+        sphere3D2.incValues(-50, 500, 100);
         cube3D = new Obj3D(buffer, "src/img/cube.obj");
         oculos3D = new Obj3D(buffer, "src/img/oculos.obj");
         oculos3D.increaseXTranslation(600);
 
-        models = new CustomBufferImage[] {cylinder3D, sphere3D, cube3D, oculos3D};
+        models = new CustomBufferImage[] {cylinder3D, sphere3D, cube3D, oculos3D, sphere3D2};
 
         startThreadsAnimations();
     }
@@ -97,6 +101,21 @@ public class Project3DPanel extends MainPanel {
                 if (!sphereStop){
                     sphere3D.move();
                     sphere3D.drawSphere();
+                    refreshView = true;
+                }
+                try {
+                    Thread.sleep(DELAY_FRAME_MS);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+
+        new Thread(() -> {
+            while (true) {
+                if (!sphereStop){
+                    sphere3D2.move();
+                    sphere3D2.drawSphere();
                     refreshView = true;
                 }
                 try {
@@ -161,7 +180,7 @@ public class Project3DPanel extends MainPanel {
                     return;
                 }
             }
-            BufferedImage animationBuffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage animationBuffer = deepCopy(background);
 
             double [][][] zBuffers = new double[models.length][getWidth()][getHeight()];
             Color [][][] colors = new Color[models.length][getWidth()][getHeight()];
@@ -202,5 +221,12 @@ public class Project3DPanel extends MainPanel {
         if (Objects.nonNull(g) && Objects.nonNull(background) && Objects.nonNull(animationBuffer)){
             g.drawImage(animationBuffer, 0, 0, null);
         }
+    }
+
+    static BufferedImage deepCopy(BufferedImage bi) {
+        ColorModel cm = bi.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bi.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
     }
 }

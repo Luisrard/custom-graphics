@@ -5,13 +5,13 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Sphere3D extends CustomBufferImage {
-    public static final Color SPHERE_COLOR = Color.YELLOW;
+    public final Color sphereColor;
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 800;
     private static final double SCALE = 100;
     private static final int N_POINTS = 50;
 
-    private double x, y, z;
+    private double x = 100, y = 20, z= 10;
     private double incX = 5, incY = 5, incZ = 5;
 
     private static final double[] VERTEX_CUBE = {400, 400, 0};
@@ -33,8 +33,9 @@ public class Sphere3D extends CustomBufferImage {
         }
     }
 
-    public Sphere3D(BufferedImage backGroundBuffer) {
+    public Sphere3D(BufferedImage backGroundBuffer, Color c) {
         super(WIDTH, HEIGHT, backGroundBuffer);
+        sphereColor = c;
     }
 
     public void drawSphere() {
@@ -61,16 +62,22 @@ public class Sphere3D extends CustomBufferImage {
                 double[] p2 = verticesMoved[index2];
                 double[] p3 = verticesMoved[index3];
 
-                drawLine(p0, p1, SPHERE_COLOR);
-                drawLine(p0, p2, SPHERE_COLOR);
-                drawLine(p1, p3, SPHERE_COLOR);
-                drawLine(p2, p3, SPHERE_COLOR);
+                drawLine(p0, p1, sphereColor);
+                drawLine(p0, p2, sphereColor);
+                drawLine(p1, p3, sphereColor);
+                drawLine(p2, p3, sphereColor);
             }
         }
 
         chargeBuffers();
     }
 
+
+    public void incValues(int x, int y, int z){
+        this.x += x;
+        this.y += y;
+        this.z += z;
+    }
     public void move(){
         x += incX;
         y += incY;
