@@ -64,6 +64,11 @@ public class MainFrame extends JFrame {
             case "09 Cilindro 3D" :
                 jPanel = new Cylinder3DPanel();
                 break;
+            case "Proyecto Final":
+                Project3DPanel project3DPanel = new Project3DPanel();
+                characterConsumer = project3DPanel.getCharacterConsumer();
+                jPanel = project3DPanel;
+                break;
             default:
                 jPanel = new JPanel();
         }

@@ -38,11 +38,11 @@ public class Cylinder3D extends CustomBufferImage {
     }
 
     public void drawCylinder() {
-        drawBackGround();
-        int[][] verticesMoved = new int[vertices.size()][4];
+        startPrevBuffers();
+        double[][] verticesMoved = new double[vertices.size()][4];
         int i = 0;
         for (double [] vertex : vertices){
-            verticesMoved[i] = multiplyVertex(vertex, matrixMove, false);
+            verticesMoved[i] = multiplyVertexWithPerspective(vertex, matrixMove);
             i++;
         }
 
@@ -53,26 +53,13 @@ public class Cylinder3D extends CustomBufferImage {
                 int index2 = i * N_POINTS + (j + 1) % N_POINTS;
                 int index3 = (i + 1) * N_POINTS + (j + 1) % N_POINTS;
 
-                int[] p0 = applyPerspective(verticesMoved[index0]);
-                int[] p1 = applyPerspective(verticesMoved[index1]);
-                int[] p2 = applyPerspective(verticesMoved[index2]);
-                int[] p3 = applyPerspective(verticesMoved[index3]);
 
-                drawLine(p0, p1, CURVE_COLOR);
-                drawLine(p0, p2, CURVE_COLOR);
-                drawLine(p1, p3, CURVE_COLOR);
-                drawLine(p2, p3, CURVE_COLOR);
+                double[][] vertices = {verticesMoved[index0], verticesMoved[index1],
+                        verticesMoved[index2], verticesMoved[index3]};
+                drawVertices(vertices, CURVE_COLOR);
             }
         }
-    }
-
-    private int[] applyPerspective(int [] vertex) {
-        double u = -VERTEX_VANISH_POINT[2] / (vertex[2] - VERTEX_VANISH_POINT[2]);
-
-        double px = VERTEX_VANISH_POINT[0] + (vertex[0] - VERTEX_VANISH_POINT[0]) * u;
-        double py = VERTEX_VANISH_POINT[1] + (vertex[1] - VERTEX_VANISH_POINT[1]) * u;
-
-        return new int[]{(int) px, (int) py};
+        chargeBuffers();
     }
 
     public void incrementAngles(double angleX, double angleY, double angleZ) {
